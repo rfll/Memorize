@@ -1,0 +1,17 @@
+# Xcode
+## User settings
+*.DS_Store
+xcuserdata/
+.build/
+
+## Obj-C/Swift specific
+*.hmap
+
+## App packaging
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+## Playgrounds
+timeline.xctimeline
+playground.xcworkspace
