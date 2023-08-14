@@ -1,12 +1,20 @@
 import SwiftUI
 
 struct ContentView: View {
-    var emojis: [String] = ["🍔", "🌍", "🏀", "🚀", "🎲", "🥱", "👀", "💯", "😡", "🤡", "🧙", "🧵", "⛈️", "🕸️", "🦄", "🦚", "☘️", "🥑", "🌮", "🍣", "🥤", "🎱", "⛳️", "🏓"]
-    @State var emojiCount = 4
     
+    var sportsThemeEmojis: [String] = ["🏀", "🎱", "🥊", "⚾️", "🛹", "🏓", "⛳️", "🏈", "🏂", "🛼", "⚽️", "🥌"]
+    
+    var facesThemeEmojis: [String] = ["🥳", "😋", "🤩", "🥸", "🤣", "😎", "🤬", "🥵", "😶‍🌫️", "🤮", "🤡", "👽", "☠️", "🫠"]
+    
+    var animalsThemeEmojis: [String] = ["🐶", "🐣", "🦄", "🐝", "🐷", "🦆", "🐻", "🐠", "🐓", "🦞", "🐋", "🐯", "🦁", "🐮", "🐌", "🦛"]
+    
+    @State var emojis: [String] = ["🏀", "🎱", "🥊", "⚾️", "🛹", "🏓", "⛳️", "🏈", "🏂", "🛼", "⚽️", "🥌"]
+    @State var emojiCount = 4
     
     var body: some View {
         VStack {
+            Text("Memorize")
+                .font(.largeTitle)
             ScrollView {
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 75))]) {
                     ForEach(emojis[0..<emojiCount], id: \.self) { emoji in
@@ -17,38 +25,61 @@ struct ContentView: View {
             }
             Spacer()
             HStack {
-                remove
+                sportsThemeButton
                 Spacer()
-                add
+                facesThemeButton
+                Spacer()
+                animalsThemeButton
             }
             .font(.largeTitle)
             .padding(.horizontal)
         }
         .padding(.horizontal)
-        .foregroundColor(.red)
+        .foregroundColor(.orange)
     }
     
-    var remove: some View {
+    var sportsThemeButton: some View {
         Button {
-            if emojiCount > 1{
-                emojiCount -= 1
-            }
-            
+            emojis = sportsThemeEmojis.shuffled()
+            emojiCount = Int.random(in: 8..<sportsThemeEmojis.count)
         } label: {
-            Image(systemName: "minus.circle")
+            VStack {
+                Image(systemName: "sportscourt.fill")
+                Text("Sports")
+                    .font(.title3)
+                    .padding(0.5)
+            }
         }
     }
     
-    var add: some View {
+    var facesThemeButton: some View {
         Button {
-            if emojiCount < emojis.count {
-                emojiCount += 1
-            }
-            
+            emojis = facesThemeEmojis.shuffled()
+            emojiCount = Int.random(in: 8..<facesThemeEmojis.count)
         } label: {
-            Image(systemName: "plus.circle")
+            VStack {
+                Image(systemName: "face.smiling")
+                Text("Faces")
+                    .font(.title3)
+                    .padding(0.5)
+            }
         }
     }
+    
+    var animalsThemeButton: some View {
+        Button {
+            emojis = animalsThemeEmojis.shuffled()
+            emojiCount = Int.random(in: 8..<animalsThemeEmojis.count)
+        } label: {
+            VStack {
+                Image(systemName: "pawprint.fill")
+                Text("Animals")
+                    .font(.title3)
+                    .padding(0.5)
+            }
+        }
+    }
+    
 }
 
 struct CardView: View {
